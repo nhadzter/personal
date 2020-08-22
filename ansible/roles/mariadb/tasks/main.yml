@@ -1,0 +1,20 @@
+---
+  - name: add mariadb repo apt key
+    apt_key:
+      url: "{{ mariadb_apt_key_url }}"
+      state: present
+
+  - name: add mariadb apt repository
+    apt_repository:
+      repo: "{{ mariadb_apt_repo }}"
+      state: present
+
+  - name: install mariadb
+    apt:
+      name: [
+        "mariadb-server",
+        "mariadb-common",
+        "mariadb-client"
+      ]
+      state: present
+    notify: start_mariadb
