@@ -1,0 +1,11 @@
+---
+- hosts: all
+  become: true
+
+  pre_tasks:
+
+  - name: upgrade system
+    apt:
+      name: "*"
+      state: latest
+      update_cache: yes
