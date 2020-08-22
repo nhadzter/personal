@@ -10,6 +10,14 @@ Vagrant.configure("2") do |config|
       vbox.memory = 4096
       vbox.cpus = 2
     end
+    web.vm.provision "ansible" do |ansible|
+      ansible.playbook = "ansible/web.yml"
+      ansible.galaxy_roles_path = "ansisble/roles/"
+      ansible.config_file = "ansible/ansible.cfg"
+      ansible.extra_vars = {
+        ansible_python_interpreter:"/usr/bin/python3"
+    }
+    end
     web.vm.network "private_network", :ip => "192.168.56.128", :name => "vboxnet0", :adapter => 2
   end
 
@@ -20,6 +28,14 @@ Vagrant.configure("2") do |config|
       vbox.name = "db"
       vbox.memory = 4096
       vbox.cpus = 2
+    end
+    db.vm.provision "ansible" do |ansible|
+      ansible.playbook = "ansible/db.yml"
+      ansible.galaxy_roles_path = "ansisble/roles/"
+      ansible.config_file = "ansible/ansible.cfg"
+      ansible.extra_vars = {
+        ansible_python_interpreter:"/usr/bin/python3"
+    }
     end
     db.vm.network "private_network", :ip => "192.168.56.160", :name => "vboxnet0", :adapter => 2
   end
@@ -32,6 +48,14 @@ Vagrant.configure("2") do |config|
       vbox.memory = 4096
       vbox.cpus = 2
     end
+    gitlab.vm.provision "ansible" do |ansible|
+      ansible.playbook = "ansible/gitlab.yml"
+      ansible.galaxy_roles_path = "ansisble/roles/"
+      ansible.config_file = "ansible/ansible.cfg"
+      ansible.extra_vars = {
+        ansible_python_interpreter:"/usr/bin/python3"
+    }
+    end
     gitlab.vm.network "private_network", :ip => "192.168.56.192", :name => "vboxnet0", :adapter => 2
   end
 
@@ -42,6 +66,14 @@ Vagrant.configure("2") do |config|
       vbox.name = "microk8s"
       vbox.memory = 8192
       vbox.cpus = 4
+    end
+    microk8s.vm.provision "ansible" do |ansible|
+      ansible.playbook = "ansible/microk8s.yml"
+      ansible.galaxy_roles_path = "ansisble/roles/"
+      ansible.config_file = "ansible/ansible.cfg"
+      ansible.extra_vars = {
+        ansible_python_interpreter:"/usr/bin/python3"
+    }
     end
     microk8s.vm.network "private_network", :ip => "192.168.56.224", :name => "vboxnet0", :adapter => 2
   end
