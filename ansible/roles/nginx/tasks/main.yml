@@ -1,0 +1,16 @@
+---
+  - name: add nginx repository apt key
+    apt_key:
+      url:  "{{ nginx_apt_key_url }}"
+      state: present
+
+  - name: add nginx apt repository
+    apt_repository:
+      repo: "{{ nginx_apt_repo }}"
+      state: present
+
+  - name: install nginx
+    apt:
+      name: "nginx"
+      state: latest
+    notify: start_nginx
