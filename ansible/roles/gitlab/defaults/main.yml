@@ -1,0 +1,4 @@
+---
+gitlab_apt_key_url: "https://packages.gitlab.com/gitlab/gitlab-ee/gpgkey"
+gitlab_apt_repo: "deb https://packages.gitlab.com/gitlab/gitlab-ee/ubuntu/ bionic main"
+gitlab_url: "http://gitlab.nhadzter.local"

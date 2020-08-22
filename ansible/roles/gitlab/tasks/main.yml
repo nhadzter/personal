@@ -1,0 +1,19 @@
+---
+  - name: add gitlab repository apt key
+    apt_key:
+      url:  "{{ gitlab_apt_key_url }}"
+      state: present
+
+  - name: add gitlab apt repository
+    apt_repository:
+      repo: "{{ gitlab_apt_repo }}"
+      state: present
+
+  - name: install gitlab
+    apt:
+      name: gitlab-ee
+      state: present
+      update_cache: yes
+    environment:
+      EXTERNAL_URL: "{{ gitlab_url }}"  
+
